@@ -44,6 +44,30 @@ def image_mars():
                 </html>"""
 
 
+@app.route('/promotion_image')
+def promotion_image():
+    return f"""<!doctype html>
+                <html lang="ru">
+                  <head>
+                    <meta charset="utf-8">
+                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+                    <title>Колонизация</title>
+                    <link rel="shortcut icon" href="static/head.png" type="image/x-icon">
+                    <link rel="stylesheet" type="text/css" href="static/style/promotion_image.css">
+                  </head>
+                  <body>
+                    <h1 >Жди нас, Марс!</h1>
+                    <img src="static/img_planet.png">
+                    <p class="text-light bg-dark">Человечество вырастает из детства.</p>
+                    <p class="bg-warning">Человечеству мала одна планета.</p>
+                    <p class="text-light bg-dark">Мы сделаем обитаемыми безжизненные пока планеты.</p>
+                    <p class="bg-success">И начнем с Марса!</p>
+                    <p class="bg-secondary">Присоединяйся!</p>
+
+                  </body>
+                </html>"""
+
+
 @app.route('/choice/<planet_name>')
 def choice(planet_name):
     d = {'Марс': ['Близок к Земле', 'Много ресурсов', 'Яндекс сказал, что на нем есть вода', 'Красивый'],
