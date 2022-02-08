@@ -18,6 +18,15 @@ def name():
                 </html>"""
 
 
+@app.route('/promotion')
+def promotion():
+    return """Человечество вырастает из детства.<br/>
+Человечеству мала одна планета.<br/>
+Мы сделаем обитаемыми безжизненные пока планеты.<br/>
+И начнем с Марса!<br/>
+Присоединяйся!"""
+
+
 @app.route('/image_mars')
 def image_mars():
     return """<!doctype html>
@@ -56,6 +65,27 @@ def choice(planet_name):
                     <p class="bg-warning">{d[1]}</p>
                     <p class="bg-success">{d[2]}</p>
                     <p class="bg-secondary">{d[3]}</p>
+                  </body>
+                </html>"""
+
+
+@app.route('/results/<nickname>/<level>/<rating>')
+def results(nickname, level, rating):
+    return f"""<!doctype html>
+                <html lang="ru">
+                  <head>
+                    <meta charset="utf-8">
+                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+                    <title>Варианты выбора</title>
+                    <link rel="shortcut icon" href="static/head.png" type="image/x-icon">
+                  </head>
+                  <body>
+                    <h1>Результаты отбора</h1>
+                    <h2>Претендента на участие в миссии: {nickname}</h2>
+                    <p class="bg-success">Поздравляем! Ваш рейтинг после {level} этапа отбора</p>
+                    <p>составляет {rating} балла!</p>
+                    <p class="bg-warning">Желаем удачи!</p>
+                    
                   </body>
                 </html>"""
 
