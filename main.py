@@ -93,7 +93,7 @@ def choice(planet_name):
                 </html>"""
 
 
-@app.route('/results/<nickname>/<level>/<rating>')
+@app.route('/results/<nickname>/<int:level>/<float:rating>')
 def results(nickname, level, rating):
     return f"""<!doctype html>
                 <html lang="ru">
