@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 align="center">Список професий</h2>
+{% if 'ol' in ol %}
+
+<ol>
+    {% for item in ['Строитель', 'Врач', 'Климатолог', 'Пилот', 'Метеоролог'] %}
+    <li>{{item}}</li>
+    {% endfor %}
+</ol>
+
+{% else %}
+<ul>
+    {% for item in ['Строитель', 'Врач', 'Климатолог', 'Пилот', 'Метеоролог'] %}
+    <li>{{item}}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+{% endblock %}
