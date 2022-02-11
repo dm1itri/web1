@@ -1,5 +1,4 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request, url_for
 app = Flask(__name__)
 
 
@@ -10,7 +9,7 @@ def name():
                   <head>
                     <meta charset="utf-8">
                     <title>Марс</title>
-                    <link rel="shortcut icon" href="static/head.png" type="image/x-icon">
+                    <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
                   </head>
                   <body>
                     <h1>Миссия Колонизация Марса</h1>
@@ -34,7 +33,7 @@ def image_mars():
                   <head>
                     <meta charset="utf-8">
                     <title>Привет, Марс!</title>
-                    <link rel="shortcut icon" href="static/head.png" type="image/x-icon">
+                    <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
                   </head>
                   <body>
                     <h1>Жди нас, Марс!</h1>
@@ -52,7 +51,7 @@ def promotion_image():
                     <meta charset="utf-8">
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
                     <title>Колонизация</title>
-                    <link rel="shortcut icon" href="static/head.png" type="image/x-icon">
+                    <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
                     <link rel="stylesheet" type="text/css" href="static/style/promotion_image.css">
                   </head>
                   <body>
@@ -81,7 +80,7 @@ def choice(planet_name):
                     <meta charset="utf-8">
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
                     <title>Варианты выбора</title>
-                    <link rel="shortcut icon" href="static/head.png" type="image/x-icon">
+                    <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
                   </head>
                   <body>
                     <h1 align="center">Моё предложение: {planet_name}</h1>
@@ -101,7 +100,7 @@ def results(nickname, level, rating):
                     <meta charset="utf-8">
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
                     <title>Варианты выбора</title>
-                    <link rel="shortcut icon" href="static/head.png" type="image/x-icon">
+                    <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
                   </head>
                   <body>
                     <h1>Результаты отбора</h1>
@@ -128,7 +127,7 @@ def carousel():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <title>Марс</title>
-    <link rel="shortcut icon" href="static/head.png" type="image/x-icon">
+    <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
   </head>
     <body>
         <h1 align="center"> Картинки Марса </h1>
@@ -161,6 +160,65 @@ def carousel():
     </body>
 </html>
 """
+
+
+@app.route('/load_photo', methods=['POST', 'GET'])
+def sample_file_upload():
+    if request.method == 'GET':
+        return f'''<!doctype html>
+                        <html lang="en">
+                          <head>
+                            <meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                             <link rel="stylesheet"
+                             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                             crossorigin="anonymous">
+                             <link rel="stylesheet" type="text/css" href="{url_for('static', filename='style/load_photo.css')}" />
+                            <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
+                            <title>Отбор астронавтов</title>
+                          </head>
+                          <body>
+                            <h1>Загрузка фотографии</h1>
+                            <h2>Для участии в миссии</h2>
+                            <form method="post" enctype="multipart/form-data">
+                               <div class="form-group">
+                                    <label for="photo">Выберите файл</label>
+                                    <input type="file" class="form-control-file" id="photo" name="file">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </form>
+                          </body>
+                        </html>'''
+    elif request.method == 'POST':
+        with open('static/image/load_image.png', 'wb') as f:
+            f.write(request.files['file'].read())
+        return f'''<!doctype html>
+                                <html lang="en">
+                                  <head>
+                                    <meta charset="utf-8">
+                                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                                     <link rel="stylesheet"
+                                     href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                                     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                                     crossorigin="anonymous">
+                                     <link rel="stylesheet" type="text/css" href="{url_for('static', filename='style/load_photo.css')}" />
+                                    <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
+                                    <title>Отбор астронавтов</title>
+                                  </head>
+                                  <body>
+                                    <h1>Загрузка фотографии</h1>
+                                    <h2>Для участии в миссии</h2>
+                                    <form method="post" enctype="multipart/form-data">
+                                       <div class="form-group">
+                                            <label for="photo">Выберите файл</label>
+                                            <input type="file" class="form-control-file" id="photo" name="file">
+                                        </div>
+                                        <img src='{'static/image/load_image.png'}' alt='Ваша Картинка'>
+                                        <button type="submit" class="btn btn-primary">Отправить</button>
+                                    </form>
+                                  </body>
+                                </html>'''
 
 
 if __name__ == '__main__':
