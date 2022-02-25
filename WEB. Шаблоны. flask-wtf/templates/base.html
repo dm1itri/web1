@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8">
         <title>{{ title }}</title>
+        {% block title %}
+        {% endblock %}
+
+        <link rel="shortcut icon" href="static/image/head.png" type="image/x-icon">
     </head>
     <body>
         <h1>Миссия Колонизация Марса</h1>
