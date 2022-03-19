@@ -221,5 +221,16 @@ def sample_file_upload():
                                 </html>'''
 
 
+@app.route('/astronaut_selection', methods=['POST', 'GET'])
+def astronaut_selection():
+    if request.method == 'GET':
+        return render_template('astronaut_selection.html', title='Отбор астронавтов')
+    elif request.method == 'POST':
+        request_form_d = dict(request.form)
+        for title in request_form_d:
+            print(f'{title}: {request_form_d[title]}')
+        return "Форма отправлена"
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
