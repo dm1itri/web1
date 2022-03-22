@@ -63,5 +63,16 @@ def distribution():
     return render_template('distribution.html', members=members)
 
 
+@app.route('/table/<sex>/<int:age>')
+def table(sex, age):
+    if age < 21:
+        image = 'ребенок.png'
+        color = '#00eaff' if sex == 'male' else '#ffa600'
+    else:
+        image = 'взрослый.png'
+        color = '#00bbcc' if sex == 'male' else '#cc8500'
+    return render_template('table.html', color=color, image=image)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
