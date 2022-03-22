@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}
+<link rel="stylesheet" href="static/style/answer.css">
+{% endblock %}
+{% block content %}
+<ul>
+    {% for key in auto_answer %}
+    <li>{{key.capitalize()}}: {{auto_answer[key]}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
