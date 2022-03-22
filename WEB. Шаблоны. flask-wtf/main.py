@@ -3,6 +3,8 @@ from answerform import AnswerForm
 from login import LoginForm
 from datetime import datetime
 from os import listdir
+from json import load
+from random import random
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -72,6 +74,14 @@ def table(sex, age):
         image = 'взрослый.png'
         color = '#00bbcc' if sex == 'male' else '#cc8500'
     return render_template('table.html', color=color, image=image)
+
+
+@app.route('/member')
+def member():
+    with open('templates/members.json') as f:
+        data = load(f)
+    print(data)
+    return render_template('member.html', data=data)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% set member = data.keys()|list|random %}
+{% set data = data[member] %}
+<div align="center">
+    <h3>{{member}} {{data['surname']}}</h3>
+    <img src="{{data['image']}}" alt="Аватарка"><br><br>
+    <h6>{{', '.join(data['specialties']|sort)}}</h6>
+</div>
+{% endblock %}
