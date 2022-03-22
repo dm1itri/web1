@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h5>Размещение по каютам</h5>
+{% set a = 'Каюта №' %}
+{% for member in members %}
+<p>{{ member }} - {{ a }}{{ loop.index }} {% if loop.first %}- капитан корабля {% endif %}</p>
+{% endfor %}
+
+{% endblock %}
