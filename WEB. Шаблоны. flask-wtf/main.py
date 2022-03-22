@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from answerform import AnswerForm
-
+from datetime import datetime
+from os import listdir
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -24,19 +25,12 @@ def list_prof(ol):
 
 @app.route('/galery', methods=['GET', 'POST'])
 def galery():
-    if request.method == 'GET':
-        return render_template('galery.html')
-    elif request.method == 'POST':
-
-        with open('static/image/load_image3.png', 'wb') as f:
-            with open('static/image/load_image2.png', 'rb') as f1:
-                f.write(f1.read())
-        with open('static/image/load_image2.png', 'wb') as f:
-            with open('static/image/load_image1.png', 'rb') as f1:
-                f.write(f1.read())
-        with open('static/image/load_image1.png', 'wb') as f:
-            f.write(request.files['file'].read())
-        return render_template('galery.html')
+    if request.method == 'POST':
+        my_file = open(f'static/image/galery/load_image{datetime.now().strftime("%H_%M_%S__%d_%m_%Y")}.png', 'wb+')
+        my_file.write(request.files['file'].read())
+        my_file.close()
+    images = [i for i in listdir('static/image/galery') if i.endswith('.png') and i != 'load_image1.png']
+    return render_template('galery.html', images=images)
 
 
 @app.route('/answer', methods=['GET', 'POST'])
