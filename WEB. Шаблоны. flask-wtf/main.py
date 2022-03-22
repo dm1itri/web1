@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from answerform import AnswerForm
+from login import LoginForm
 from datetime import datetime
 from os import listdir
 
@@ -46,6 +47,14 @@ def answer():
         auto_answer['ready'] = "ДА" if auto_answer['ready'] == 'y' else 'НЕТ'
         return render_template('auto_answer.html', auto_answer=auto_answer, title=auto_answer['title'])
     return render_template('answer.html', form=form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect(f'/index/{request.form["id"]}')
+    return render_template('login.html', form=form)
 
 
 

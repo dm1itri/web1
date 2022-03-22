@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<img src="https://yastatic.net/s3/lyceum/content/images/second-year/web/MARS-2-7.png" alt="Эмблема" align="left">
+<h1>Аварийный доступ</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.id.label }}<br>
+        {{ form.id(class="form-control") }}<br>
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(class="form-control", type="password") }}<br>
+    </p>
+
+        <p>
+        {{ form.id_cap.label }}<br>
+        {{ form.id_cap(class="form-control") }}<br>
+    </p>
+    <p>
+        {{ form.password_cap.label }}<br>
+        {{ form.password_cap(class="form-control", type="password") }}<br>
+    </p>
+
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+{% endblock %}
